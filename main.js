@@ -131,15 +131,25 @@ function courseData() {
   let course = {
     name: "",
     credit: 0,
+
     midterm: 0,
+    ofMidterm: 0,
+
     activity: 0,
+    ofActivity: 0,
+
     project: 0,
+    ofProject: 0,
+
     final: 0,
+    ofFinal: 0,
+
     total: 0,
     totalCourse: 0,
     grade: 0,
     points: 0,
   };
+
   return course;
 }
 
@@ -382,7 +392,6 @@ function createCourse() {
                     <th>component</th>
                     <th>score</th>
                     <th>out of</th>
-                    <th class="disktop">of course</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -398,7 +407,6 @@ function createCourse() {
                         class="of-mid-degree"
                       />
                     </td>
-                    <td class="out-of-mid disktop">0%</td>
                   </tr>
                 </tbody>
                 <tbody>
@@ -418,7 +426,6 @@ function createCourse() {
                         class="of-activities-degree"
                       />
                     </td>
-                    <td class="out-of-activity disktop">0%</td>
                   </tr>
                 </tbody>
                 <tbody>
@@ -438,7 +445,6 @@ function createCourse() {
                         class="of-project-degree"
                       />
                     </td>
-                    <td class="out-of-project disktop">0%</td>
                   </tr>
                 </tbody>
                 <tbody>
@@ -458,7 +464,6 @@ function createCourse() {
                         class="of-final-degree"
                       />
                     </td>
-                    <td class="out-of-final disktop">0%</td>
                   </tr>
                 </tbody>
                 <tfoot>
@@ -554,35 +559,47 @@ function udateCourseData() {
   let semester = semesters.find(function (semester) {
     return semester.id === activeSemesterID;
   });
+
   courseContainer.querySelectorAll(".name-course").forEach(function (input) {
     input.addEventListener("input", function () {
       let courseElement = this.closest(".course");
+
       let index = Array.from(
         courseContainer.querySelectorAll(".course"),
       ).indexOf(courseElement);
+
       semester.courses[index].name = this.value;
       saveData();
     });
   });
+
   courseContainer.querySelectorAll(".mid-degree").forEach(function (input) {
     input.addEventListener("input", function () {
       let courseElement = this.closest(".course");
+
       let index = Array.from(
         courseContainer.querySelectorAll(".course"),
       ).indexOf(courseElement);
+
       semester.courses[index].midterm = this.value;
+
       semester.courses[index].total =
         Number(semester.courses[index].midterm) +
         Number(semester.courses[index].activity) +
         Number(semester.courses[index].project) +
         Number(semester.courses[index].final);
+
       courseElement.querySelector(".total-get-degrees").innerHTML =
         semester.courses[index].total;
+
       calculateCourseGrade(semester.courses[index]);
       calculateSemesterCredits(semester);
       calculateSemesterGrade(semester);
+
       cumulativeGpa = calculateCumulativeGpa(semesters);
+
       document.getElementById("cumulaative-gpa").innerHTML = cumulativeGpa || 0;
+
       let totalCredit = 0;
 
       semesters.forEach(function (semester) {
@@ -592,31 +609,69 @@ function udateCourseData() {
       document.querySelectorAll("#creditsD").forEach(function (credit) {
         credit.innerHTML = totalCredit;
       });
+
+      saveData();
     });
-    saveData();
   });
+
+  courseContainer.querySelectorAll(".of-mid-degree").forEach(function (input) {
+    input.addEventListener("input", function () {
+      let courseElement = this.closest(".course");
+
+      let index = Array.from(
+        courseContainer.querySelectorAll(".course"),
+      ).indexOf(courseElement);
+
+      semester.courses[index].ofMidterm = Number(this.value);
+
+      semester.courses[index].totalCourse =
+        Number(semester.courses[index].ofMidterm) +
+        Number(semester.courses[index].ofActivity) +
+        Number(semester.courses[index].ofProject) +
+        Number(semester.courses[index].ofFinal);
+
+      courseElement.querySelector(".total-course-degrees").innerHTML =
+        semester.courses[index].totalCourse;
+
+      calculateCourseGrade(semester.courses[index]);
+
+      courseElement.querySelector(".grade-course").innerHTML =
+        semester.courses[index].grade;
+
+      saveData();
+    });
+  });
+
   courseContainer
     .querySelectorAll(".activities-degree")
     .forEach(function (input) {
       input.addEventListener("input", function () {
         let courseElement = this.closest(".course");
+
         let index = Array.from(
           courseContainer.querySelectorAll(".course"),
         ).indexOf(courseElement);
+
         semester.courses[index].activity = this.value;
+
         semester.courses[index].total =
           Number(semester.courses[index].midterm) +
           Number(semester.courses[index].activity) +
           Number(semester.courses[index].project) +
           Number(semester.courses[index].final);
+
         courseElement.querySelector(".total-get-degrees").innerHTML =
           semester.courses[index].total;
+
         calculateCourseGrade(semester.courses[index]);
         calculateSemesterCredits(semester);
         calculateSemesterGrade(semester);
+
         cumulativeGpa = calculateCumulativeGpa(semesters);
+
         document.getElementById("cumulaative-gpa").innerHTML =
           cumulativeGpa || 0;
+
         let totalCredit = 0;
 
         semesters.forEach(function (semester) {
@@ -626,28 +681,68 @@ function udateCourseData() {
         document.querySelectorAll("#creditsD").forEach(function (credit) {
           credit.innerHTML = totalCredit;
         });
+
+        saveData();
       });
-      saveData();
     });
+
+  courseContainer
+    .querySelectorAll(".of-activities-degree")
+    .forEach(function (input) {
+      input.addEventListener("input", function () {
+        let courseElement = this.closest(".course");
+
+        let index = Array.from(
+          courseContainer.querySelectorAll(".course"),
+        ).indexOf(courseElement);
+
+        semester.courses[index].ofActivity = Number(this.value);
+
+        semester.courses[index].totalCourse =
+          Number(semester.courses[index].ofMidterm) +
+          Number(semester.courses[index].ofActivity) +
+          Number(semester.courses[index].ofProject) +
+          Number(semester.courses[index].ofFinal);
+
+        courseElement.querySelector(".total-course-degrees").innerHTML =
+          semester.courses[index].totalCourse;
+
+        calculateCourseGrade(semester.courses[index]);
+
+        courseElement.querySelector(".grade-course").innerHTML =
+          semester.courses[index].grade;
+
+        saveData();
+      });
+    });
+
   courseContainer.querySelectorAll(".project-degree").forEach(function (input) {
     input.addEventListener("input", function () {
       let courseElement = this.closest(".course");
+
       let index = Array.from(
         courseContainer.querySelectorAll(".course"),
       ).indexOf(courseElement);
+
       semester.courses[index].project = this.value;
+
       semester.courses[index].total =
         Number(semester.courses[index].midterm) +
         Number(semester.courses[index].activity) +
         Number(semester.courses[index].project) +
         Number(semester.courses[index].final);
+
       courseElement.querySelector(".total-get-degrees").innerHTML =
         semester.courses[index].total;
+
       calculateCourseGrade(semester.courses[index]);
       calculateSemesterCredits(semester);
       calculateSemesterGrade(semester);
+
       cumulativeGpa = calculateCumulativeGpa(semesters);
+
       document.getElementById("cumulaative-gpa").innerHTML = cumulativeGpa || 0;
+
       let totalCredit = 0;
 
       semesters.forEach(function (semester) {
@@ -657,28 +752,68 @@ function udateCourseData() {
       document.querySelectorAll("#creditsD").forEach(function (credit) {
         credit.innerHTML = totalCredit;
       });
+
+      saveData();
     });
-    saveData();
   });
+
+  courseContainer
+    .querySelectorAll(".of-project-degree")
+    .forEach(function (input) {
+      input.addEventListener("input", function () {
+        let courseElement = this.closest(".course");
+
+        let index = Array.from(
+          courseContainer.querySelectorAll(".course"),
+        ).indexOf(courseElement);
+
+        semester.courses[index].ofProject = Number(this.value);
+
+        semester.courses[index].totalCourse =
+          Number(semester.courses[index].ofMidterm) +
+          Number(semester.courses[index].ofActivity) +
+          Number(semester.courses[index].ofProject) +
+          Number(semester.courses[index].ofFinal);
+
+        courseElement.querySelector(".total-course-degrees").innerHTML =
+          semester.courses[index].totalCourse;
+
+        calculateCourseGrade(semester.courses[index]);
+
+        courseElement.querySelector(".grade-course").innerHTML =
+          semester.courses[index].grade;
+
+        saveData();
+      });
+    });
+
   courseContainer.querySelectorAll(".final-degree").forEach(function (input) {
     input.addEventListener("input", function () {
       let courseElement = this.closest(".course");
+
       let index = Array.from(
         courseContainer.querySelectorAll(".course"),
       ).indexOf(courseElement);
+
       semester.courses[index].final = this.value;
+
       semester.courses[index].total =
         Number(semester.courses[index].midterm) +
         Number(semester.courses[index].activity) +
         Number(semester.courses[index].project) +
         Number(semester.courses[index].final);
+
       courseElement.querySelector(".total-get-degrees").innerHTML =
         semester.courses[index].total;
+
       calculateCourseGrade(semester.courses[index]);
       calculateSemesterCredits(semester);
       calculateSemesterGrade(semester);
+
       cumulativeGpa = calculateCumulativeGpa(semesters);
+
       document.getElementById("cumulaative-gpa").innerHTML = cumulativeGpa || 0;
+
       let totalCredit = 0;
 
       semesters.forEach(function (semester) {
@@ -688,23 +823,61 @@ function udateCourseData() {
       document.querySelectorAll("#creditsD").forEach(function (credit) {
         credit.innerHTML = totalCredit;
       });
+
+      saveData();
     });
-    saveData();
   });
+
+  courseContainer
+    .querySelectorAll(".of-final-degree")
+    .forEach(function (input) {
+      input.addEventListener("input", function () {
+        let courseElement = this.closest(".course");
+
+        let index = Array.from(
+          courseContainer.querySelectorAll(".course"),
+        ).indexOf(courseElement);
+
+        semester.courses[index].ofFinal = Number(this.value);
+
+        semester.courses[index].totalCourse =
+          Number(semester.courses[index].ofMidterm) +
+          Number(semester.courses[index].ofActivity) +
+          Number(semester.courses[index].ofProject) +
+          Number(semester.courses[index].ofFinal);
+
+        courseElement.querySelector(".total-course-degrees").innerHTML =
+          semester.courses[index].totalCourse;
+
+        calculateCourseGrade(semester.courses[index]);
+
+        courseElement.querySelector(".grade-course").innerHTML =
+          semester.courses[index].grade;
+
+        saveData();
+      });
+    });
+
   courseContainer
     .querySelectorAll(".credits-of-course")
     .forEach(function (input) {
       input.addEventListener("input", function () {
         let courseElement = this.closest(".course");
+
         let index = Array.from(
           courseContainer.querySelectorAll(".course"),
         ).indexOf(courseElement);
+
         semester.courses[index].credit = Number(this.value);
+
         calculateSemesterCredits(semester);
         calculateSemesterGrade(semester);
+
         cumulativeGpa = calculateCumulativeGpa(semesters);
+
         document.getElementById("cumulaative-gpa").innerHTML =
           cumulativeGpa || 0;
+
         let totalCredit = 0;
 
         semesters.forEach(function (semester) {
@@ -714,8 +887,9 @@ function udateCourseData() {
         document.querySelectorAll("#creditsD").forEach(function (credit) {
           credit.innerHTML = totalCredit;
         });
+
+        saveData();
       });
-      saveData();
     });
 }
 courseContainer.addEventListener("input", function (event) {
@@ -770,7 +944,6 @@ function displayCourses(courses) {
                     <th>component</th>
                     <th>score</th>
                     <th>out of</th>
-                    <th class="disktop">of course</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -786,7 +959,6 @@ function displayCourses(courses) {
                         class="of-mid-degree"
                       />
                     </td>
-                    <td class="out-of-mid disktop">0%</td>
                   </tr>
                 </tbody>
                 <tbody>
@@ -806,7 +978,6 @@ function displayCourses(courses) {
                         class="of-activities-degree"
                       />
                     </td>
-                    <td class="out-of-activity disktop">0%</td>
                   </tr>
                 </tbody>
                 <tbody>
@@ -826,7 +997,6 @@ function displayCourses(courses) {
                         class="of-project-degree"
                       />
                     </td>
-                    <td class="out-of-project disktop">0%</td>
                   </tr>
                 </tbody>
                 <tbody>
@@ -846,7 +1016,6 @@ function displayCourses(courses) {
                         class="of-final-degree"
                       />
                     </td>
-                    <td class="out-of-final disktop">0%</td>
                   </tr>
                 </tbody>
                 <tfoot>
@@ -877,19 +1046,16 @@ function displayCourses(courses) {
 
     courseDiv.querySelector(".mid-degree").value = course.midterm;
 
-    courseDiv.querySelector(".of-mid-degree").value = course.totalCourse;
-
     courseDiv.querySelector(".activities-degree").value = course.activity;
-
-    courseDiv.querySelector(".of-activities-degree").value = course.totalCourse;
 
     courseDiv.querySelector(".project-degree").value = course.project;
 
-    courseDiv.querySelector(".of-project-degree").value = course.totalCourse;
-
     courseDiv.querySelector(".final-degree").value = course.final;
 
-    courseDiv.querySelector(".of-final-degree").value = course.totalCourse;
+    courseDiv.querySelector(".of-mid-degree").value = course.ofMidterm;
+    courseDiv.querySelector(".of-activities-degree").value = course.ofActivity;
+    courseDiv.querySelector(".of-project-degree").value = course.ofProject;
+    courseDiv.querySelector(".of-final-degree").value = course.ofFinal;
 
     courseDiv.querySelector(".total-get-degrees").innerHTML = course.total;
 
