@@ -1,0 +1,275 @@
+@media (min-width: 1000px) {
+  .disktop {
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  .phone {
+    display: none !important;
+  }
+
+  /* styling nav bar content */
+
+  nav button {
+    display: none;
+  }
+  nav {
+    padding: 15px 60px;
+  }
+
+  nav h1 {
+    font-weight: var(--weight-700);
+    font-size: 35px;
+  }
+
+  nav ul.disktop {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+  }
+
+  nav ul.disktop li a {
+    font-size: 20px;
+    font-weight: var(--weight-400);
+    color: var(--text-color);
+    position: relative;
+  }
+
+  nav ul.disktop li a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 25px;
+    background-color: var(--bt-gpa-color);
+    transition: var(--transtion);
+  }
+
+  nav ul.disktop li a:hover::after {
+    width: 100%;
+    height: 2px;
+    left: 0;
+    transform: translateX(0);
+    background-color: var(--bt-gpa-color);
+  }
+
+  /* styling hero section */
+
+  .hero {
+    padding: 20px 60px;
+    margin: 30px 0;
+  }
+  /* styling header of titles */
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+  }
+
+  .header h2 {
+    font-size: 45px;
+    color: var(--bt-gpa-color);
+    font-weight: bold;
+  }
+
+  .header p {
+    font-size: 16px;
+    letter-spacing: 0;
+  }
+
+  #add-semester {
+    font-size: 24px;
+  }
+
+  .details-semesters h2#creditsD,
+  .details-semesters h2#semestersD {
+    font-size: 35px;
+    color: white;
+  }
+
+  /* styling semester details */
+
+  .details-semesters {
+    background-color: var(--bt-gpa-color);
+    border-radius: 20px;
+    padding: 35px 40px 20px;
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .details-semesters p {
+    font-size: 20px;
+    color: var(--text-gpa-title-color);
+    margin-bottom: 15px;
+  }
+
+  .semeseters-btn button input {
+    width: 120px;
+    height: 30px;
+  }
+
+  .details-semesters h2 {
+    font-size: 35px;
+    color: white;
+    letter-spacing: 4px;
+  }
+
+  .details-semesters h2.gpa {
+    font-size: 55px;
+  }
+
+  /* styling nav container */
+
+  .nav-cotainer .semeseters-btn {
+    gap: 20px;
+  }
+  .nav-cotainer button.semD {
+    display: flex;
+    gap: 10px;
+    flex-direction: row !important;
+    justify-content: start;
+    align-items: center;
+  }
+
+  /* styiling course */
+
+  .course .header {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .remove-course {
+    margin: 20px 30px 0;
+  }
+
+  .course .header input {
+    min-width: 400px;
+    font-size: 30px;
+  }
+
+  .course .header button {
+    font-size: 20px;
+  }
+  .course .component-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+    gap: 30px;
+    padding: 30px 10px;
+  }
+
+  .course .component-wrapper tr {
+    width: 100%;
+    display: block;
+  }
+  .course .component-wrapper th {
+    width: 200px;
+    text-align: start;
+  }
+
+  .course .component-wrapper th:nth-child(2),
+  .course .component-wrapper th:nth-child(3) {
+    text-align: center;
+  }
+
+  .course .component-wrapper td {
+    width: 200px;
+    text-align: start;
+  }
+  .course .component-wrapper td:nth-child(2),
+  .course .component-wrapper td:nth-child(3) {
+    text-align: center;
+  }
+
+  .course .component-wrapper input {
+    width: 80px;
+    height: 35px;
+    text-align: center;
+    font-size: 16px;
+    color: var(--text-color);
+    border: none;
+    background-color: var(--semester-nav-bg-color);
+    border-radius: 10px;
+    -moz-appearance: textfield;
+  }
+
+  .course .component-wrapper input::-webkit-inner-spin-button,
+  .course .component-wrapper input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .course .component-wrapper table tfoot {
+    border-top: 1px solid var(--border);
+    padding-top: 50px;
+    font-size: 20px;
+    font-weight: var(--weight-600);
+  }
+
+  .course .component-wrapper table tfoot td {
+    width: 20%;
+    display: table-cell;
+    font-size: 20px;
+  }
+
+  .course .component-wrapper table tfoot td.total {
+    font-weight: var(--weight-400);
+    font-size: 22px;
+  }
+
+  .course .component-wrapper table tfoot td:last-child {
+    width: 300px;
+  }
+
+  .course .component-wrapper table tfoot td:last-child span:last-child {
+    font-size: 25px;
+    margin-left: 10px;
+  }
+  .course .component-wrapper table .disktop {
+    display: table-cell !important;
+    padding-left: 40px;
+  }
+
+  .credit-course {
+    margin: 0 10px;
+    font-size: 22px;
+    font-weight: var(--weight-600);
+  }
+
+  input.credits-of-course {
+    width: 130px;
+  }
+
+  .btns-course {
+    flex-direction: row;
+    justify-content: start;
+    margin: 35px 0 20px;
+    width: 200px; 
+  }
+
+  button.remove-course {
+    width: auto;
+    padding: 20px 40px;
+  }
+
+  /* styling summary of semester */
+
+  .semester-summary {
+    padding: 20px 40px;
+  }
+
+  .semester-summary .semester-details {
+    flex-direction: row;
+    align-items: start;
+    justify-content: start;
+    gap: 200px;
+  }
+
+  .semester-summary .header h2 {
+    font-size: 24px;
+  }
+}

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="media.css" />
+    <link rel="stylesheet" href="media.css" />
+    <link rel="icon" href="icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Inter:ital,opsz,wght@0,14..32,300;1,14..32,300&family=Manrope:wght@200..800&family=Overpass:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css"
+      integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <meta
+      name="description"
+      content="A Simple GPA calculator to calculate semester GPA and cumulative GPA"
+    />
+    <meta name="robots" content="index, follow" />
+    <title>gpa calculator | gpa tracker</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>GPA Tracker</h1>
+        <ul class="disktop">
+          <li><a href="#">dashboard</a></li>
+          <li><a href="#">scale</a></li>
+        </ul>
+        <ul class="phone">
+          <li><a href="#">dashboard</a></li>
+          <li><a href="#">scale</a></li>
+        </ul>
+        <button id="icon-menu">
+          <i class="fa-duotone fa-solid fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <!-- adding hero section contain all content -->
+
+    <section class="hero">
+      <!-- adding title -->
+      <div class="disktop header">
+        <h2>My Academic Progress</h2>
+        <p>
+          Track every course component and calculate your semester and
+          cumulative GPA.
+        </p>
+      </div>
+      <div class="phone header">
+        <h2>My Progress</h2>
+        <p>Track your GPA.</p>
+      </div>
+
+      <!-- adding semester details and cumulative gpa -->
+
+      <div class="details-semesters">
+        <div class="cumulative-gpa">
+          <p>cumulative gpa</p>
+          <h2 class="gpa" id="cumulaative-gpa">-</h2>
+        </div>
+        <div class="total-credit disktop">
+          <p>total credits</p>
+          <h2 id="creditsD">-</h2>
+        </div>
+        <div class="semesters disktop">
+          <p>semesters</p>
+          <h2 id="semestersD">-</h2>
+        </div>
+        <div class="cumulative-grade disktop">
+          <p>cumulative grade</p>
+          <h2 id="cumulativeD">B+</h2>
+        </div>
+        <div class="semesters-credits phone">
+          <h2 id="creditsD">-</h2>
+          <p>creidts</p>
+          <p>.</p>
+          <h2 id="semestersD">0</h2>
+          <p>semesters</p>
+        </div>
+      </div>
+
+      <!-- adding semesters nav -->
+
+      <div class="nav-cotainer">
+        <div class="title-btn">
+          <h2 class="title" id="semestertitle">semester 1</h2>
+          <div class="add-remove-sem">
+            <button class="add" id="add-semester">+ add semester</button>
+          </div>
+        </div>
+        <div class="nav-semesters">
+          <div class="semeseters-btn"></div>
+        </div>
+      </div>
+
+      <!-- adding course component -->
+
+      <div class="course-container"></div>
+      <div class="btns-course">
+        <button class="add-course">add course</button>
+      </div>
+      <div class="semester-summary">
+        <div class="header">
+          <h2>semester summary</h2>
+        </div>
+        <div class="semester-details">
+          <div class="semester-gpa">
+            <h2>-</h2>
+            <p>semester GPA</p>
+          </div>
+          <div class="semester-credits">
+            <p>credits</p>
+            <h2>-</h2>
+          </div>
+          <div class="semester-grade">
+            <p>grade</p>
+            <h2 class="grade-term">-</h2>
+          </div>
+        </div>
+      </div>
+    </section>
+    <button class="show-semesters-array">show array</button>
+    <script src="main.js"></script>
+  </body>
+</html>
