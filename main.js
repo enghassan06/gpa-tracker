@@ -88,8 +88,11 @@ function displaySemesters() {
 function updateData() {
   cumulativeGpa = calculateCumulativeGpa(semesters);
 
+  calculateCumulativeGrade();
+
   document.getElementById("cumulaative-gpa").innerHTML = cumulativeGpa || 0;
 
+  document.getElementById("cumulativeD").innerHTML = cumulativeGrade;
   let totalCredit = 0;
 
   semesters.forEach(function (semester) {
