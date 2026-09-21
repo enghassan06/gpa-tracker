@@ -68,12 +68,17 @@ function displaySemesters() {
       });
 
       activeSemesterID = Number(this.dataset.id);
-
       this.classList.add("sem-active");
 
-      courseContainer.innerHTML = "";
+      let semester = semesters.find(function (semester) {
+        return semester.id === activeSemesterID;
+      });
 
+      document.getElementById("semestertitle").innerHTML = semester.name;
+
+      courseContainer.innerHTML = "";
       displayCourses(semester.courses);
+      udateCourseData();
     });
 
     semesterBtn.addEventListener("input", function () {
@@ -345,7 +350,14 @@ function createSemester() {
       e.classList.remove("sem-active");
     });
     activeSemesterID = Number(this.dataset.id);
+    let semester = semesters.find(function (semester) {
+      return semester.id === activeSemesterID;
+    });
+
+    document.getElementById("semestertitle").innerHTML = semester.name;
+
     displayCourses(semester.courses);
+    udateCourseData();
     this.classList.add("sem-active");
     saveData();
   });
@@ -611,6 +623,7 @@ function udateCourseData() {
       });
 
       saveData();
+      updateData();
     });
   });
 
@@ -639,6 +652,7 @@ function udateCourseData() {
         semester.courses[index].grade;
 
       saveData();
+      updateData();
     });
   });
 
@@ -683,6 +697,7 @@ function udateCourseData() {
         });
 
         saveData();
+        updateData();
       });
     });
 
@@ -713,6 +728,7 @@ function udateCourseData() {
           semester.courses[index].grade;
 
         saveData();
+        updateData();
       });
     });
 
@@ -754,6 +770,7 @@ function udateCourseData() {
       });
 
       saveData();
+      updateData();
     });
   });
 
@@ -784,6 +801,7 @@ function udateCourseData() {
           semester.courses[index].grade;
 
         saveData();
+        updateData();
       });
     });
 
@@ -825,6 +843,7 @@ function udateCourseData() {
       });
 
       saveData();
+      updateData();
     });
   });
 
@@ -855,6 +874,7 @@ function udateCourseData() {
           semester.courses[index].grade;
 
         saveData();
+        updateData();
       });
     });
 
@@ -889,6 +909,7 @@ function udateCourseData() {
         });
 
         saveData();
+        updateData();
       });
     });
 }
