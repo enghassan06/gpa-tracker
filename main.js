@@ -73,8 +73,23 @@ function displaySemesters() {
       let semester = semesters.find(function (semester) {
         return semester.id === activeSemesterID;
       });
+      document.querySelector(".semester-gpa h2").innerHTML = semester.gpa || 0;
+
+      document.querySelector(".semester-credits h2").innerHTML =
+        semester.totalCredits || 0;
+
+      document.querySelector(".semester-grade h2").innerHTML =
+        semester.gradeSemester || "-";
 
       document.getElementById("semestertitle").innerHTML = semester.name;
+
+      document.querySelector(".semester-gpa h2").innerHTML = semester.gpa || 0;
+
+      document.querySelector(".semester-credits h2").innerHTML =
+        semester.totalCredits || 0;
+
+      document.querySelector(".semester-grade h2").innerHTML =
+        semester.gradeSemester || "-";
 
       courseContainer.innerHTML = "";
       displayCourses(semester.courses);
@@ -212,6 +227,7 @@ function calculateCourseGrade(course) {
 function calculateSemesterGrade(semester) {
   let semesterPoints = 0;
   semester.courses.forEach(function (course) {
+    calculateCourseGrade(course);
     semesterPoints += course.points * course.credit;
   });
   semester.gpa = Number((semesterPoints / semester.totalCredits).toFixed(2));
@@ -219,7 +235,7 @@ function calculateSemesterGrade(semester) {
   if (semester.gpa >= 3.7) {
     semester.gradeSemester = "A+";
   } else if (semester.gpa >= 3.3) {
-    semester.gradeSemester = "A-";
+    semester.gradeSemester = "A";
   } else if (semester.gpa >= 3.0) {
     semester.gradeSemester = "B+";
   } else if (semester.gpa >= 2.7) {
@@ -227,16 +243,14 @@ function calculateSemesterGrade(semester) {
   } else if (semester.gpa >= 2.3) {
     semester.gradeSemester = "B-";
   } else if (semester.gpa >= 2.0) {
-    semester.gradeSemester = "C+";
-  } else if (semester.gpa >= 1.7) {
     semester.gradeSemester = "C";
-  } else if (semester.gpa >= 1.3) {
+  } else if (semester.gpa >= 1.7) {
     semester.gradeSemester = "C-";
-  } else if (semester.gpa >= 1.0) {
+  } else if (semester.gpa >= 1.3) {
     semester.gradeSemester = "D+";
-  } else if (semester.gpa > 0) {
+  } else if (semester.gpa >= 1.0) {
     semester.gradeSemester = "D";
-  } else if (semester.gpa === 0.0) {
+  } else {
     semester.gradeSemester = "F";
   }
 }
@@ -353,6 +367,13 @@ function createSemester() {
     let semester = semesters.find(function (semester) {
       return semester.id === activeSemesterID;
     });
+    document.querySelector(".semester-gpa h2").innerHTML = semester.gpa || 0;
+
+    document.querySelector(".semester-credits h2").innerHTML =
+      semester.totalCredits || 0;
+
+    document.querySelector(".semester-grade h2").innerHTML =
+      semester.gradeSemester || "-";
 
     document.getElementById("semestertitle").innerHTML = semester.name;
 
@@ -741,15 +762,18 @@ function udateCourseData() {
       ).indexOf(courseElement);
 
       semester.courses[index].project = this.value;
+      updateData();
 
       semester.courses[index].total =
         Number(semester.courses[index].midterm) +
         Number(semester.courses[index].activity) +
         Number(semester.courses[index].project) +
         Number(semester.courses[index].final);
+      updateData();
 
       courseElement.querySelector(".total-get-degrees").innerHTML =
         semester.courses[index].total;
+      updateData();
 
       calculateCourseGrade(semester.courses[index]);
       calculateSemesterCredits(semester);
@@ -764,6 +788,7 @@ function udateCourseData() {
       semesters.forEach(function (semester) {
         totalCredit += Number(semester.totalCredits);
       });
+      updateData();
 
       document.querySelectorAll("#creditsD").forEach(function (credit) {
         credit.innerHTML = totalCredit;
@@ -785,12 +810,14 @@ function udateCourseData() {
         ).indexOf(courseElement);
 
         semester.courses[index].ofProject = Number(this.value);
+        updateData();
 
         semester.courses[index].totalCourse =
           Number(semester.courses[index].ofMidterm) +
           Number(semester.courses[index].ofActivity) +
           Number(semester.courses[index].ofProject) +
           Number(semester.courses[index].ofFinal);
+        updateData();
 
         courseElement.querySelector(".total-course-degrees").innerHTML =
           semester.courses[index].totalCourse;
@@ -814,15 +841,18 @@ function udateCourseData() {
       ).indexOf(courseElement);
 
       semester.courses[index].final = this.value;
+      updateData();
 
       semester.courses[index].total =
         Number(semester.courses[index].midterm) +
         Number(semester.courses[index].activity) +
         Number(semester.courses[index].project) +
         Number(semester.courses[index].final);
+      updateData();
 
       courseElement.querySelector(".total-get-degrees").innerHTML =
         semester.courses[index].total;
+      updateData();
 
       calculateCourseGrade(semester.courses[index]);
       calculateSemesterCredits(semester);
@@ -858,15 +888,18 @@ function udateCourseData() {
         ).indexOf(courseElement);
 
         semester.courses[index].ofFinal = Number(this.value);
+        updateData();
 
         semester.courses[index].totalCourse =
           Number(semester.courses[index].ofMidterm) +
           Number(semester.courses[index].ofActivity) +
           Number(semester.courses[index].ofProject) +
           Number(semester.courses[index].ofFinal);
+        updateData();
 
         courseElement.querySelector(".total-course-degrees").innerHTML =
           semester.courses[index].totalCourse;
+        updateData();
 
         calculateCourseGrade(semester.courses[index]);
 
@@ -889,6 +922,7 @@ function udateCourseData() {
         ).indexOf(courseElement);
 
         semester.courses[index].credit = Number(this.value);
+        updateData();
 
         calculateSemesterCredits(semester);
         calculateSemesterGrade(semester);
@@ -897,6 +931,7 @@ function udateCourseData() {
 
         document.getElementById("cumulaative-gpa").innerHTML =
           cumulativeGpa || 0;
+        updateData();
 
         let totalCredit = 0;
 
