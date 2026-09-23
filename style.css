@@ -315,14 +315,14 @@ nav button {
 
 .course .component-wrapper {
   display: grid;
-  grid-template-rows: 1fr;
+  grid-template-rows: 0fr;
   gap: 10px;
   overflow: hidden;
   transition: var(--transtion);
 }
-.course .component-wrapper-closed {
+.course .component-wrapper-opened {
   display: grid;
-  grid-template-rows: 0fr;
+  grid-template-rows: 1fr;
   overflow: hidden;
   transition: var(--transtion);
 }

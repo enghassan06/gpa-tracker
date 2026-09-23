@@ -1,7 +1,15 @@
 // structure of semesters
 
 let semesters = JSON.parse(localStorage.getItem("semesters")) || [];
-let semesterID = 0;
+
+let semesterID = semesters.length
+  ? Math.max(
+      ...semesters.map(function (semester) {
+        return Number(semester.id);
+      }),
+    ) + 1
+  : 0;
+
 let activeSemesterID;
 
 function saveData() {
@@ -531,7 +539,7 @@ function createCourse() {
     collapsBtn.classList.toggle("fa-caret-down");
     courseDiv
       .querySelector(".component-wrapper")
-      .classList.toggle("component-wrapper-closed");
+      .classList.toggle("component-wrapper-opened");
   });
 
   return courseDiv;
@@ -1129,7 +1137,7 @@ function displayCourses(courses) {
       collapsBtn.classList.toggle("fa-caret-down");
       courseDiv
         .querySelector(".component-wrapper")
-        .classList.toggle("component-wrapper-closed");
+        .classList.toggle("component-wrapper-opened");
     });
   });
 }
